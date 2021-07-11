@@ -27,11 +27,11 @@
 [comment]: <> (English | [简体中文]&#40;./README.zh-CN.md&#41; | [日本語]&#40;./README.ja.md&#41; | [Spanish]&#40;./README.es.md&#41;)
 
 ## 地址
-- [ 🌐 github仓库后端地址](https://github.com/yanshicheng/super_ops)
-- [ 🌐 github仓库前端地址](https://github.com/yanshicheng/super_ops_web)
-
 - [ 🌐 码云仓库后端地址](https://gitee.com/super-ops/super_ops)
 - [ 🌐 码云仓库前端地址](https://gitee.com/super-ops/super_ops_web)
+
+- [ 🌐 github仓库后端地址](https://github.com/yanshicheng/super_ops)
+- [ 🌐 github仓库前端地址](https://github.com/yanshicheng/super_ops_web)
 
 ## 友情链接
 
