@@ -24,14 +24,14 @@
   </a>
 </p>
 
-English | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md) | [Spanish](./README.es.md)
+[comment]: <> (English | [简体中文]&#40;./README.zh-CN.md&#41; | [日本語]&#40;./README.ja.md&#41; | [Spanish]&#40;./README.es.md&#41;)
 
 ## 地址
-- [ 🌐 github仓库后端地址](https://github.com/chuzhixin/vue-admin-beautiful?utm_source=gold_browser_extension)
-- [ 🌐 github仓库前端地址](https://github.com/chuzhixin/vue-admin-beautiful?utm_source=gold_browser_extension)
+- [ 🌐 github仓库后端地址](https://github.com/yanshicheng/super_ops)
+- [ 🌐 github仓库前端地址](https://github.com/yanshicheng/super_ops_web)
 
-- [ 🌐 码云仓库前端地址](https://gitee.com/chu1204505056/vue-admin-beautiful?_from=gitee_search)
-- [ 🌐 码云仓库后端地址](https://gitee.com/chu1204505056/vue-admin-beautiful?_from=gitee_search)
+- [ 🌐 码云仓库后端地址](https://gitee.com/super-ops/super_ops)
+- [ 🌐 码云仓库前端地址](https://gitee.com/super-ops/super_ops_web)
 
 ## 友情链接
 
@@ -41,7 +41,7 @@ English | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md) | [Spa
 ## 鸣谢
 
 | 项目 |
-| -------------------------------------------------- -------------- |
+| -------------------------------------------------- |
 | [vue](https://github.com/vuejs/vue) |
 | [element-ui](https://github.com/ElemeFE/element) |
 | [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/) |
