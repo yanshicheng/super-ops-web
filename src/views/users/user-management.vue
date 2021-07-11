@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="hover" >
+    <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
         <span>用户管理</span>
       </div>
@@ -377,7 +377,7 @@ export default {
         page: this.pageQuerylist.page,
         size: this.pageQuerylist.size
       }).then(response => {
-        this.queryDatalist = response.data.data
+        this.queryDatalist = response.data.result
         this.pageQuerylist.total = response.count
       })
     },

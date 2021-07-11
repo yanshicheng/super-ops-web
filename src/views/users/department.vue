@@ -183,7 +183,7 @@ export default {
         page: this.pageQuerylist.page,
         size: this.pageQuerylist.size
       }).then(response => {
-        this.QueryUserInfo = response.data.data
+        this.QueryUserInfo = response.data.result
         this.pageQuerylist.total = response.count
       })
     },

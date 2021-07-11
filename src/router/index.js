@@ -80,6 +80,75 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/cmdb',
+    component: Layout,
+    // redirect: '/cmdb/acces-center',
+    alwaysShow: true, // will always show the root menu
+    name: 'cmdb',
+    meta: {
+      title: 'CMDB',
+      icon: 'cmdb',
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'classify',
+        component: () => import('@/views/cmdb/tableClassify/tableManage'),
+        name: 'CmdbClassify',
+
+        meta: {
+          title: '类型管理',
+          roles: ['admin'],
+          icon: 'asset'
+        }
+      },
+      {
+        path: 'classify/info',
+        component: () => import('@/views/cmdb/tableClassify/tableInfo'),
+        name: 'CMDBClassifyInfo',
+        hidden: true,
+        meta: {
+          title: '表数据详情'
+        }
+      },
+      {
+        path: 'asset',
+        component: () => import('@/views/cmdb/assetsCenter/assetsCenter'),
+        name: 'CmdbAsset',
+        meta: {
+          title: '资产中心',
+          icon: 'asset'
+        }
+      },
+      {
+        path: 'asset/search',
+        component: () => import('@/views/cmdb/searchCenter/scList'),
+        name: 'cmdb-device-category',
+        meta: {
+          title: '查询中心',
+          roles: ['admin'],
+          icon: 'category'
+        }
+      },
+      {
+        path: 'asset/search/info',
+        component: () => import('@/views/cmdb/searchCenter/searchInfo'),
+        name: 'CMDBAssetInfo',
+        hidden: true,
+        meta: {
+          title: '表数据详情'
+        }
+      }
+      // {
+      //   path: 'detail/:id(\\d+)',
+      //   component: () => import('@/views/cmdb/Detail'),
+      //   name: 'CmdbDetail',
+      //   meta: {title: '设备详情', noCache: true, activeMenu: '/cmdb/asset-list'},
+      //   hidden: true
+      // }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
@@ -202,9 +271,7 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes = [
-
-]
+export const asyncRoutes = []
 
 const createRouter = () => new Router({
   mode: 'history', // require service support

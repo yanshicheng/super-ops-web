@@ -1,9 +1,9 @@
 <template>
 
   <div>
-    <el-card class="box-card" shadow="hover">
+    <el-card class="box-card" shadow="hover" style="margin: 20px">
       <div slot="header" class="clearfix">
-        <span>菜单管理</span>
+        <span>资产类型</span>
       </div>
       <div class="filter-container">
         <!--      <el-input-->
@@ -19,7 +19,7 @@
         <el-button
           class="el-button filter-item el-button--primary"
           icon="el-icon-edit"
-          style="margin-left: 10px;height: 35px"
+          style="margin-left: 10px;"
           type="primary"
           @click="handleCreate"
         >
@@ -29,27 +29,30 @@
       <div class="text item">
         <el-table
           :data="queryDatalist"
+          border
           row-key="id"
           lazy
           :load="load"
           :tree-props="{children: 'childrens', hasChildren: 'hasChildren'}"
+          style="width: 100%;margin-top:5px;"
         >
-          style="width: 100%;margin-top:30px;">
-          <el-table-column align="center" label="菜单名称" width="220">
+          <el-table-column
+            align="center"
+            label="序号"
+            type="index"
+            width="80"
+          />
+          <el-table-column align="center" label="ID" width="80">
+            <template slot-scope="scope">
+              {{ scope.row.id }}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="名称">
             <template slot-scope="scope">
               {{ scope.row.title }}
             </template>
           </el-table-column>
-          <el-table-column align="center" label="菜单路径" width="220">
-            <template slot-scope="scope">
-              {{ scope.row.url }}
-            </template>
-          </el-table-column>
-          <el-table-column align="center" label="图标" width="220">
-            <template slot-scope="scope">
-              {{ scope.row.icon }}
-            </template>
-          </el-table-column>
+
           <el-table-column align="center" label="操作">
             <template slot-scope="scope">
               <el-button type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
@@ -64,14 +67,7 @@
         <el-form-item label="名称" label-width="80px" prop="title">
           <el-input v-model="tempData.title" />
         </el-form-item>
-        <el-form-item label="路径" label-width="80px" prop="url">
-          <el-input v-model="tempData.url" />
-        </el-form-item>
-
-        <el-form-item label="图标" label-width="80px" prop="icon">
-          <el-input v-model="tempData.icon" />
-        </el-form-item>
-        <el-form-item label="父级菜单" label-width="80px">
+        <el-form-item label="一级类型" label-width="80px">
           <el-switch v-model="switchStatus" @change="switchChange($event)" />
         </el-form-item>
         <el-form-item v-if="switchStatus === false && nodeData.length !== 0" label="指定父级" label-width="80px">
@@ -103,9 +99,7 @@
 <script>
 import { Message } from 'element-ui'
 // import { deepClone } from '@/utils'
-import { Menu as masterApi } from '@/api/prem'
-
-// const defaultMenu = {
+import { DeviceCategory as masterApi } from '@/api/cmdb'
 //   title: '',
 //   url: '',
 //   pid: 0,
@@ -117,16 +111,14 @@ export default {
   data() {
     return {
       rules: {
-        title: [{ required: true, message: '名称必填', trigger: 'blur' }],
-        url: [{ required: true, message: '路径必填', trigger: 'blur' }],
-        icon: [{ required: true, message: '图标必填', trigger: 'blur' }]
+        title: [{ required: true, message: '名称必填', trigger: 'blur' }]
       },
       queryDatalist: [],
       dialogFormVisible: false,
       dialogStatus: 'update',
       textMap: {
         update: '更新信息',
-        create: '创建菜单'
+        create: '创建类型'
       },
       dialog: false,
       tempData: [],
@@ -189,7 +181,7 @@ export default {
             })
           })
         } else {
-          console.log('error')
+          return false
         }
       })
     },
@@ -216,6 +208,7 @@ export default {
       }
     },
     handleCreate() {
+      this.nodeData = []
       this.switchStatus = true
       this.tempData = {
         'pid': 0

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="box-card" shadow="hover" >
+    <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
         <span>角色管理</span>
       </div>
