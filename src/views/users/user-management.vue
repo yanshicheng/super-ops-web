@@ -368,7 +368,8 @@ export default {
     },
     getDepartments() {
       Department.list().then((request) => {
-        this.departments = request.data
+        console.log(request)
+        this.departments = request.data.result
       })
     },
     GetList() {

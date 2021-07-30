@@ -79,7 +79,7 @@
       <template>
         <el-tabs v-model="activeName">
           <el-tab-pane label="基本信息" name="info">
-            <el-form ref="form" :model="tempData" label-width="80px" :rules="fordata" style="height: 200px">
+            <el-form ref="formup" :model="tempData" label-width="80px" :rules="fordata" style="height: 200px">
               <el-form-item label="名称 " prop="name" style="width: 60%">
                 <el-input v-model="tempData.name" />
               </el-form-item>
@@ -231,12 +231,14 @@ export default {
       })
     },
     handleCreate() {
-      // this.tempData = ''
+      this.tempData = {}
+      this.$nextTick(()=>{
+        this.$refs['form'].clearValidate()
+      })
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
     },
     handleDownFormVisible() {
-      this.tempData = ''
       this.dialogFormVisible = false
       this.dialogFormVisibleUp = false
     },

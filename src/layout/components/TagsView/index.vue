@@ -291,16 +291,19 @@ export default {
 
 <style lang="scss" scoped>
 .tags-view-container {
-
-    position: relative;
+  //border: 1px solid #ebebeb;
+  //border-radius: 3px;
+  //transition: .2s;
+  //background-color: #fff;
+  //  position: relative;
     box-sizing: border-box;
-    display: flex;
-    align-content: center;
-    align-items: center;
+    //display: flex;
+    //align-content: center;
+    //align-items: center;
     justify-content: space-between;
-    height: 30px;
-    padding-right: 20px;
-    padding-left: 20px;
+    height: 40px;
+    padding-right: -100px;
+    //padding-left: 20px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -311,43 +314,69 @@ export default {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
   .tags-view-wrapper {
     .tags-view-item {
+      padding: 0 20px;
+      height: 40px;
+      -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      height: 20px;
-      margin-right: 5px;
-      line-height: 20px;
-      border: 1px solid #dcdfe6;
-      border-radius: 2px;
-
+      line-height: 40px;
       display: inline-block;
+      list-style: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: #303133;
       position: relative;
+      //box-sizing: border-box;
+      //height: 30px;
+      //margin-right: 5px;
+      //line-height: 20px;
+      border: none;
+      border-left: 1px solid #f4f4f4;
+      //padding-right: 20px;
+      //padding: 0 8px;
+      //border-bottom-color: #fff;
+      border-bottom: 1px solid transparent;
+      transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
+
+    //border-radius: 2px;
+
+      //display: inline-block;
+      //position: relative;
       cursor: pointer;
       min-width: 70px;
       text-align:center;
-      color: #495060;
-      background: #fff;
-      padding: 0 8px;
-      font-size: 12px;
-      margin-left: 3px;
-      margin-top: 9px;
+      //background-color: #ddd;
+      //background-color: #ddd;
+      background-clip: padding-box;
+      min-height: 28px;
+      border-radius: 4px;
+      //color: #495060;
+      background-color: #ffffff;
+      //background: #fff;
+
+      //font-size: 12px;
+      //margin-left: 3px;
+      //margin-top: 9px;
       &:first-of-type {
-        margin-left: 15px;
+        //margin-left: 15px;
       }
       &:last-of-type {
         margin-right: 15px;
       }
       &.active {
-        background-color: #ffffff;
         color: #1890ff;
-        border-color: #1890ff;
+        background-color: #409EFF14;
+        //color: #1890ff;
+        //border-color: #1890ff;
         &::before {
-
+          color: #1890ff;
+          //color: #eaeaea;
           background: #fff;
           display: inline-block;
           width: 8px;
           height: 8px;
           border-radius: 50%;
           position: relative;
-          margin-right: 2px;
+          //margin-right: 2px;
         }
 		&:hover{
       color: #1890ff;
@@ -410,29 +439,3 @@ export default {
   }
 </style>
 
-<style lang="scss">
-
-//reset element css of el-icon-close
-.tags-view-wrapper {
-  .tags-view-item {
-    .el-icon-close {
-      width: 16px;
-      height: 16px;
-      vertical-align: 2px;
-      border-radius: 50%;
-      text-align: center;
-      transition: all .3s cubic-bezier(.645, .045, .355, 1);
-      transform-origin: 100% 50%;
-      &:before {
-        transform: scale(.6);
-        display: inline-block;
-        vertical-align: -3px;
-      }
-      &:hover {
-        background-color: #b4bccc;
-        color: #fff;
-      }
-    }
-  }
-}
-</style>

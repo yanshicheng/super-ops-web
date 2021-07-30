@@ -6,7 +6,7 @@
         <h1 v-else class="sidebar-title">{{ title }} </h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <img v-if="logo" :src=logo class="sidebar-logo">
         <h1 class="sidebar-title">{{ title }} </h1>
       </router-link>
     </transition>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       title: 'Super Ops',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      logo: require('@/assets/image/title.png')
     }
   }
 }
@@ -46,7 +46,7 @@ export default {
   height: 65px;
   overflow: hidden;
   line-height: 65px;
-  background: #001529;
+  //background: #001529;
   height: 75px;
   line-height: 75px;
   text-align: center;

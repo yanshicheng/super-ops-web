@@ -75,170 +75,180 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: {title: 'Dashboard', icon: 'dashboard', affix: true}
       }
     ]
-  },
-  {
-    path: '/cmdb',
-    component: Layout,
-    // redirect: '/cmdb/acces-center',
-    alwaysShow: true, // will always show the root menu
-    name: 'cmdb',
-    meta: {
-      title: 'CMDB',
-      icon: 'cmdb',
-      roles: ['admin']
-    },
-    children: [
-      {
-        path: 'classify',
-        component: () => import('@/views/cmdb/tableClassify/tableManage'),
-        name: 'CmdbClassify',
-
-        meta: {
-          title: '类型管理',
-          roles: ['admin'],
-          icon: 'asset'
-        }
-      },
-      {
-        path: 'classify/info',
-        component: () => import('@/views/cmdb/tableClassify/tableInfo'),
-        name: 'CMDBClassifyInfo',
-        hidden: true,
-        meta: {
-          title: '表数据详情'
-        }
-      },
-      {
-        path: 'asset',
-        component: () => import('@/views/cmdb/assetsCenter/assetsCenter'),
-        name: 'CmdbAsset',
-        meta: {
-          title: '资产中心',
-          icon: 'asset'
-        }
-      },
-      {
-        path: 'asset/search',
-        component: () => import('@/views/cmdb/searchCenter/scList'),
-        name: 'cmdb-device-category',
-        meta: {
-          title: '查询中心',
-          roles: ['admin'],
-          icon: 'category'
-        }
-      },
-      {
-        path: 'asset/search/info',
-        component: () => import('@/views/cmdb/searchCenter/searchInfo'),
-        name: 'CMDBAssetInfo',
-        hidden: true,
-        meta: {
-          title: '表数据详情'
-        }
-      }
-      // {
-      //   path: 'detail/:id(\\d+)',
-      //   component: () => import('@/views/cmdb/Detail'),
-      //   name: 'CmdbDetail',
-      //   meta: {title: '设备详情', noCache: true, activeMenu: '/cmdb/asset-list'},
-      //   hidden: true
-      // }
-    ]
-  },
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: '权限管理',
-      icon: 'lock',
-      roles: ['admin'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'roles',
-        component: () => import('@/views/permission/role'),
-        name: 'RolesPermission',
-        meta: {
-          title: '角色管理',
-          roles: ['admin'], // or you can only set roles in sub nav
-          icon: 'user-roles'
-        }
-      },
-      {
-        path: 'directive',
-        component: () => import('@/views/permission/permission'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'API权限',
-          roles: ['admin'],
-          icon: 'roles'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: 'menus',
-        component: () => import('@/views/permission/menu'),
-        name: 'MenusPermission',
-        meta: {
-          title: '菜单权限',
-          roles: ['admin'],
-          icon: 'menu'
-        }
-      }
-    ]
-  },
+  }
+  // {
+  //   path: '/cmdb',
+  //   component: Layout,
+  //   // redirect: '/cmdb/acces-center',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'cmdb',
+  //   meta: {
+  //     title: 'CMDB',
+  //     icon: 'cmdb',
+  //     roles: ['admin']
+  //   },
+  //   children: [
+  //     {
+  //       path: 'classify',
+  //       component: () => import('@/views/cmdb/tableClassify/tableManage'),
+  //       name: 'CmdbClassify',
+  //
+  //       meta: {
+  //         title: '类型管理',
+  //         roles: ['admin'],
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'classify/info',
+  //       component: () => import('@/views/cmdb/tableClassify/tableInfo'),
+  //       name: 'CMDBClassifyInfo',
+  //       hidden: true,
+  //       meta: {
+  //         title: '表数据详情'
+  //       }
+  //     },
+  //     {
+  //       path: 'asset',
+  //       component: () => import('@/views/cmdb/assetsCenter/assetsCenter'),
+  //       name: 'CmdbAsset',
+  //       meta: {
+  //         title: '资产中心',
+  //         icon: 'asset'
+  //       }
+  //     },
+  //     {
+  //       path: 'asset/search',
+  //       component: () => import('@/views/cmdb/searchCenter/scList'),
+  //       name: 'cmdb-device-category',
+  //       meta: {
+  //         title: '查询中心',
+  //         roles: ['admin'],
+  //         icon: 'category'
+  //       }
+  //     },
+  //     {
+  //       path: 'asset/search/info',
+  //       component: () => import('@/views/cmdb/searchCenter/searchInfo'),
+  //       name: 'CMDBAssetInfo',
+  //       hidden: true,
+  //       meta: {
+  //         title: '表数据详情'
+  //       }
+  //     }
+  //     // {
+  //     //   path: 'detail/:id(\\d+)',
+  //     //   component: () => import('@/views/cmdb/Detail'),
+  //     //   name: 'CmdbDetail',
+  //     //   meta: {title: '设备详情', noCache: true, activeMenu: '/cmdb/asset-list'},
+  //     //   hidden: true
+  //     // }
+  //   ]
+  // },
+  // {
+  //   path: '/permission',
+  //   component: Layout,
+  //   redirect: '/permission/page',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'Permission',
+  //
+  //   order: 1,
+  //   meta: {
+  //     title: '权限管理',
+  //     icon: 'lock',
+  //     roles: ['admin'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: 'roles',
+  //       component: () => import('@/views/permission/role'),
+  //       name: 'RolesPermission',
+  //       meta: {
+  //         title: '角色管理',
+  //         roles: ['admin'], // or you can only set roles in sub nav
+  //         icon: 'user-roles'
+  //       }
+  //     },
+  //     {
+  //       path: 'directive',
+  //       component: () => import('@/views/permission/permission'),
+  //       name: 'DirectivePermission',
+  //       meta: {
+  //         title: 'API权限',
+  //         roles: ['admin'],
+  //         icon: 'roles'
+  //         // if do not set roles, means: this page does not require permission
+  //       }
+  //     },
+  //     {
+  //       path: 'menus',
+  //       component: () => import('@/views/permission/menu'),
+  //       name: 'MenusPermission',
+  //       meta: {
+  //         title: '菜单权限',
+  //         roles: ['admin'],
+  //         icon: 'menu'
+  //       }
+  //     }
+  //   ]
+  // },
   /** when your routing map is too long, you can split it into small modules **/
-  {
-    path: '/user',
-    component: Layout,
-    redirect: '/user/personal-center',
-    alwaysShow: true, // will always show the root menu
-    name: 'user',
-    meta: {
-      title: '用户中心',
-      icon: 'user',
-      roles: ['admin'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'personal-center',
-        component: () => import('@/views/users/personal-center'),
-        name: 'user-info',
-        meta: {
-          title: '个人中心',
-          roles: ['admin'], // or you can only set roles in sub nav
-          icon: 'user-center'
-        }
-      },
-      {
-        path: 'department',
-        component: () => import('@/views/users/department'),
-        name: 'department',
-        meta: {
-          title: '部门管理',
-          roles: ['admin'],
-          icon: 'department'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: 'user-management',
-        component: () => import('@/views/users/user-management'),
-        name: 'user-management',
-        meta: {
-          title: '用户管理',
-          roles: ['admin'],
-          icon: 'management'
-        }
-      }
-    ]
-  },
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   redirect: '/user/personal-center',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'user',
+  //   meta: {
+  //     title: '用户中心',
+  //     icon: 'user',
+  //     roles: ['admin'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: 'personal-center',
+  //       component: () => import('@/views/users/personal-center'),
+  //       name: 'user-info',
+  //       meta: {
+  //         title: '个人中心',
+  //         roles: ['admin'], // or you can only set roles in sub nav
+  //         icon: 'user-center'
+  //       }
+  //     },
+  //     {
+  //       path: 'department',
+  //       component: () => import('@/views/users/department'),
+  //       name: 'department',
+  //       meta: {
+  //         title: '部门管理',
+  //         roles: ['admin'],
+  //         icon: 'department'
+  //         // if do not set roles, means: this page does not require permission
+  //       }
+  //     },
+  //     {
+  //       path: 'user-management',
+  //       component: () => import('@/views/users/user-management'),
+  //       name: 'user-management',
+  //       meta: {
+  //         title: '用户管理',
+  //         roles: ['admin'],
+  //         icon: 'management'
+  //       }
+  //     }
+  //   ]
+  // },
+
+]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
   {
     path: '/error',
     component: Layout,
@@ -253,29 +263,23 @@ export const constantRoutes = [
         path: '401',
         component: () => import('@/views/error-page/401'),
         name: 'Page401',
-        meta: { title: '401', noCache: true }
+        meta: {title: '401', noCache: true}
       },
       {
         path: '404',
         component: () => import('@/views/error-page/404'),
         name: 'Page404',
-        meta: { title: '404', noCache: true }
+        meta: {title: '404', noCache: true}
       }
     ]
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
-
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = []
 
 const createRouter = () => new Router({
   mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 

@@ -1,5 +1,5 @@
-import { asyncRoutes, constantRoutes } from '@/router'
-import { Menu } from '@/api/prem'
+import {asyncRoutes, constantRoutes} from '@/router'
+import {Menu} from '@/api/prem'
 import Layout from '@/layout'
 
 /**
@@ -24,7 +24,7 @@ export function filterAsyncRoutes(routes, roles) {
   const res = []
 
   routes.forEach(route => {
-    const tmp = { ...route }
+    const tmp = {...route}
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles)
@@ -52,18 +52,22 @@ function filterMenus(localMenus, remoteMenus) {
   const res = []
 
   remoteMenus.forEach(remote => {
+    console.log(remote.component)
     remote.component = Layout
     remote.children.forEach(item => {
       const component = item.component
-      item.component = resolve => require(['@/views/' + component + '.vue'], resolve)
+      console.log(component)
+      item.component = resolve => require(['@/views' + component + '.vue'], resolve)
     })
+    console.log(remote)
     res.push(remote)
   })
+  console.log(res)
   return res
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
+  generateRoutes({commit}, roles) {
     return new Promise(resolve => {
       Menu.tree().then(res => {
         const remoteRoutes = res.data
