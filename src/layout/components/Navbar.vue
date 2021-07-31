@@ -29,7 +29,7 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/index">
+          <router-link to="/users/personal-center">
             <el-dropdown-item @click.native="user-info">个人中心</el-dropdown-item>
           </router-link>
           <router-link to="/">

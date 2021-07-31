@@ -79,8 +79,14 @@
                   <a @click="denglu">
                     <div class="git-other-login-icon">
                       <svg-icon icon-class="dingding" />
+
                     </div>
                   </a>
+                </div>
+                <div>
+                  <span class="text-muted" style="font-size: 15px; margin-left: 20px">测试账户</span>
+                  <div class="text-muted" style="font-size: 15px; margin-left: 20px">管理员: super 密码: super</div>
+                  <span class="text-muted" style="font-size: 15px;margin-left: 30px">普通用户: edit 普通用户: edit</span>
                 </div>
               </div>
             </div>
@@ -105,8 +111,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'devops',
-        password: 'devops'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
@@ -133,6 +139,7 @@ export default {
     }
   },
   created() {
+    // prompt()
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
@@ -149,6 +156,9 @@ export default {
     denglu() {
       alert('开发中')
     },
+    // prompt() {
+    //   alert('动态权限测试账户管理员: super  密码: super 普通用户: edit 密码: edit')
+    // },
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
@@ -219,7 +229,7 @@ export default {
 
   .login-container-form {
     width: calc(100% - 120px);
-    height: 440px;
+    height: 500px;
     padding: 4vh;
     margin-top: calc((100vh - 440px) / 2);
     margin-right: 20px;
