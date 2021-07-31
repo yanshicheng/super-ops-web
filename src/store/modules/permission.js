@@ -52,17 +52,16 @@ function filterMenus(localMenus, remoteMenus) {
   const res = []
 
   remoteMenus.forEach(remote => {
-    console.log(remote.component)
     remote.component = Layout
     remote.children.forEach(item => {
       const component = item.component
-      console.log(component)
       item.component = resolve => require(['@/views' + component + '.vue'], resolve)
     })
-    console.log(remote)
     res.push(remote)
   })
-  console.log(res)
+  localMenus.forEach(remote => {
+    res.push(remote)
+  })
   return res
 }
 
