@@ -11,7 +11,7 @@
         <!--        导航条-->
       </div>
       <app-main style="margin-top: 30px; margin-left: 20px;width: 97%;" />
-<!--      //style="margin: 20px; width: 97%; "-->
+      <!--      //style="margin: 20px; width: 97%; "-->
       <!--      内容区域-->
       <!--      <right-panel v-if="showSettings">-->
       <!--        <settings />-->

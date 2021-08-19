@@ -184,7 +184,7 @@ export default {
         size: this.pageQuerylist.size
       }).then(response => {
         this.QueryUserInfo = response.data.result
-        this.pageQuerylist.total = response.count
+        this.pageQuerylist.total = response.data.count
       })
     },
     handleFormVisible(row) {
@@ -232,7 +232,7 @@ export default {
     },
     handleCreate() {
       this.tempData = {}
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.$refs['form'].clearValidate()
       })
       this.dialogStatus = 'create'

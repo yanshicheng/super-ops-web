@@ -212,7 +212,6 @@ export default {
     },
     getUserInfo() {
       UserInfoO.list().then((request) => {
-        console.log(request)
         request.data.forEach((inc, index) => {
           this.ferData.push({
             label: inc.username,
@@ -261,13 +260,10 @@ export default {
     handlEdit(row) {
       this.ferValue = []
       masterApi.get(row.id).then((request) => {
-        console.log(request)
         request.data.user.forEach((inc, index) => {
-          console.log(inc)
           this.ferValue.push(inc.id)
         })
       })
-      console.log(this.ferValue)
       this.iname = row.name
       this.tempData = JSON.parse(JSON.stringify(row))
       this.$nextTick(() => {

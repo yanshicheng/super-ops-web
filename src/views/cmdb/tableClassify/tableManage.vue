@@ -107,9 +107,7 @@ export default {
   },
   methods: {
     fetchTableClassifyTree() {
-      console.log('res')
       masterApi.tree({ search: this.search }).then(res => {
-        console.log(res)
         this.mainData = res.data
       })
     },
@@ -121,7 +119,11 @@ export default {
     },
     addNewType(data) {
       this.isShowAddType = true
-      if (Object.keys(data).length) this.editTypeData = Object.assign({}, data)
+      if (data) {
+        this.editTypeData = Object.assign({}, data)
+      } else {
+        this.editTypeData = {}
+      }
     },
     deleteTableType(data) {
       this.$confirm('是否确认删除当前分类?', '提示', {

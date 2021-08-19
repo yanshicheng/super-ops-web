@@ -60,6 +60,7 @@
             <template slot-scope="{row}">
               <el-switch
                 v-model="row.is_superuser"
+                disabled
                 active-color="#13ce66"
                 inactive-color="#ff4949"
               />
@@ -69,6 +70,7 @@
             <template slot-scope="{row}">
               <el-switch
                 v-model="row.is_staff"
+                disabled
                 active-color="#13ce66"
                 inactive-color="#ff4949"
               />
@@ -78,6 +80,7 @@
             <template slot-scope="{row}">
               <el-switch
                 v-model="row.is_active"
+                disabled
                 active-color="#13ce66"
                 inactive-color="#ff4949"
               />
@@ -160,6 +163,16 @@
         <el-form-item v-if="dialogStatus==='create'" label="确认密码" label-width="80px" prop="re_password" style="width: 300px">
           <el-input v-model="tempData.re_password" placeholder="请再次输入密码" show-password />
         </el-form-item>
+        <el-form-item label="角色" label-width="80px" style="width: 300px">
+          <el-select v-model="tempData.role" multiple placeholder="请选择">
+            <el-option
+              v-for="item in roles"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+        </el-form-item>
         <el-form-item label="手机号" label-width="80px" prop="phone" style="width: 300px">
           <el-input v-model="tempData.phone" />
         </el-form-item>
@@ -212,6 +225,16 @@
           <el-form-item label="超级管理员" label-width="100px">
             <el-switch v-model="tempData.is_superuser" />
           </el-form-item>
+          <el-form-item label="角色" label-width="80px" style="width: 300px">
+            <el-select v-model="tempData.role" multiple placeholder="请选择">
+              <el-option
+                v-for="item in roles"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
           <el-form-item label="状态" label-width="80px">
             <el-switch v-model="tempData.is_active" />
           </el-form-item>
@@ -245,6 +268,7 @@ import {
 } from '@/api/user'
 
 import { UserInfoO as masterApi } from '@/api/user'
+import { Role } from '@/api/role'
 
 const resetPasswordData = {
   id: '',
@@ -340,16 +364,36 @@ export default {
         create: '创建部门'
       },
       dialog: false,
-      tempData: {},
+      tempData: {
+        name: '',
+        username: '',
+        email: '',
+        phone: '',
+        remarks: '',
+        password: '',
+        department: '',
+        role: '',
+        icon: '',
+        is_superuser: false,
+        is_active: false,
+        is_staff: false
+      },
       departments: [],
       role_list: [],
-      dialogStatus: 'create'
+      dialogStatus: 'create',
+      roles: []
     }
   },
   created() {
     this.GetList()
+    this.GetRole()
   },
   methods: {
+    GetRole() {
+      Role.list().then(response => {
+        this.roles = response.data
+      })
+    },
     getFile(event) {
       this.tempData.icon = event.target.files[0]
     },
@@ -367,9 +411,8 @@ export default {
       this.GetList()
     },
     getDepartments() {
-      Department.list().then((request) => {
-        console.log(request)
-        this.departments = request.data.result
+      Department.list().then((res) => {
+        this.departments = res.data.result ? res.data.result : res.data
       })
     },
     GetList() {
@@ -379,7 +422,7 @@ export default {
         size: this.pageQuerylist.size
       }).then(response => {
         this.queryDatalist = response.data.result
-        this.pageQuerylist.total = response.count
+        this.pageQuerylist.total = response.data.count
       })
     },
     handlEdit(row) {
@@ -396,12 +439,13 @@ export default {
           formData.append('username', this.tempData.username)
           formData.append('email', this.tempData.email)
           formData.append('phone', this.tempData.phone)
-          formData.append('is_superuser', this.tempData.is_superuser)
-          formData.append('is_active', this.tempData.is_active)
-          formData.append('is_staff', this.tempData.is_staff)
+          formData.append('is_superuser', this.tempData.is_superuser ? this.tempData.is_superuser : false)
+          formData.append('is_active', this.tempData.is_active ? this.tempData.is_active : false)
+          formData.append('is_staff', this.tempData.is_staff ? this.tempData.is_staff : false)
           formData.append('department', this.tempData.department)
-          formData.append('remarks', this.tempData.remarks)
+          formData.append('remarks', this.tempData.remarks ? this.tempData.remarks : false)
           formData.append('password', this.tempData.password)
+          formData.append('role', this.tempData.role)
           formData.append('icon', this.tempData.icon)
           const config = {
             headers: {

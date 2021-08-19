@@ -189,7 +189,7 @@ export default {
             })
           })
         } else {
-          console.log('error')
+          console.log('Submit Error!')
         }
       })
     },

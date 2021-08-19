@@ -75,7 +75,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: {title: 'Dashboard', icon: 'dashboard', affix: true}
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
     ]
   }
@@ -149,12 +149,10 @@ export const constantRoutes = [
   //   ]
   // },
   // {
-  //   path: '/permission',
+  //   path: '/permissions',
   //   component: Layout,
-  //   redirect: '/permission/page',
   //   alwaysShow: true, // will always show the root menu
-  //   name: 'Permission',
-  //
+  //   name: 'PermissionS',
   //   order: 1,
   //   meta: {
   //     title: '权限管理',
@@ -163,19 +161,19 @@ export const constantRoutes = [
   //   },
   //   children: [
   //     {
-  //       path: 'roles',
-  //       component: () => import('@/views/permission/role'),
+  //       path: 'roless',
+  //       component: () => import('@/views/permission/roles/index'),
   //       name: 'RolesPermission',
   //       meta: {
   //         title: '角色管理',
   //         roles: ['admin'], // or you can only set roles in sub nav
-  //         icon: 'user-roles'
+  //         icon: 'user-roless'
   //       }
   //     },
   //     {
   //       path: 'directive',
-  //       component: () => import('@/views/permission/permission'),
-  //       name: 'DirectivePermission',
+  //       component: () => import('@/views/permission/rules/index'),
+  //       name: 'DirectivePermissions',
   //       meta: {
   //         title: 'API权限',
   //         roles: ['admin'],
@@ -185,8 +183,8 @@ export const constantRoutes = [
   //     },
   //     {
   //       path: 'menus',
-  //       component: () => import('@/views/permission/menu'),
-  //       name: 'MenusPermission',
+  //       component: () => import('@/views/permission/menus/index'),
+  //       name: 'MenusPermissions',
   //       meta: {
   //         title: '菜单权限',
   //         roles: ['admin'],
@@ -194,7 +192,7 @@ export const constantRoutes = [
   //       }
   //     }
   //   ]
-  // },
+  // }
   /** when your routing map is too long, you can split it into small modules **/
   // {
   //   path: '/user',
@@ -250,6 +248,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    hidden: true,
     path: '/error',
     component: Layout,
     redirect: 'noRedirect',
@@ -263,23 +262,23 @@ export const asyncRoutes = [
         path: '401',
         component: () => import('@/views/error-page/401'),
         name: 'Page401',
-        meta: {title: '401', noCache: true}
+        meta: { title: '401', noCache: true }
       },
       {
         path: '404',
         component: () => import('@/views/error-page/404'),
         name: 'Page404',
-        meta: {title: '404', noCache: true}
+        meta: { title: '404', noCache: true }
       }
     ]
   },
   // 404 page must be placed at the end !!!
-  {path: '*', redirect: '/404', hidden: true}
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
   mode: 'hash', // require service support
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
 

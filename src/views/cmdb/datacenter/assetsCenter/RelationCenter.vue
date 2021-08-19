@@ -84,7 +84,13 @@ import { CMDBAssets as masterApi } from '@/api/cmdb'
 
 export default {
   name: '',
-  props: ['parent_asset_id'],
+  // props: ['parent_asset_id'],
+  props: {
+    parentAssetId: {
+      type: Number,
+      default: null
+    }
+  },
   data() {
     return {
       tableData: [],
@@ -103,8 +109,8 @@ export default {
   },
   methods: {
     fetchBDRelationList() {
-      if (!this.parent_asset_id) return false
-      masterApi.get(this.parent_asset_id).then(res => {
+      if (!this.parentAssetId) return false
+      masterApi.get(this.parentAssetId).then(res => {
         if (res.code === 0) {
           this.tableData = this.formatTableList(res.data.children)
         } else {
@@ -152,7 +158,7 @@ export default {
     },
     cancelBD(id, index, tableData) {
       const params = {
-        parent_asset_id: this.parent_asset_id, // 数据的 id
+        parent_asset_id: this.parentAssetId, // 数据的 id
         child_asset_id: id.id // 绑定页面数据的id
       }
       masterApi.un_bind(params).then(res => {
@@ -222,7 +228,7 @@ export default {
     },
     confirmSetRelationSubmit(id) {
       const params = {
-        parent_asset_id: this.parent_asset_id, // 数据的 id
+        parent_asset_id: this.parentAssetId, // 数据的 id
         child_asset_id: id // 绑定页面数据的id
       }
       masterApi.bind(params).then(res => {

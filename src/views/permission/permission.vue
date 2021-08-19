@@ -245,7 +245,6 @@ export default {
     getUserInfo() {
       this.Roleoptions = {}
       Role.list().then((request) => {
-        console.log(request)
         this.Roleoptions = request.data.data
       })
     },
@@ -316,7 +315,6 @@ export default {
     GetList() {
       Classify.list().then(response => {
         this.queryDatalist = response.data.data
-        console.log(this.queryDatalist)
       })
     },
     getPerNodes(pid) {
@@ -328,12 +326,6 @@ export default {
     },
     handleEdit(scope) {
       this.nodeStatus = false
-      console.log(scope.row.id)
-      console.log(scope.row.id)
-      console.log(scope.row.id)
-      console.log(scope.row.id)
-      console.log(scope.row.id)
-      console.log(scope.row.id)
       this.classifyId = scope.row.id
       this.dialogStatus = 'update'
       this.tempData = JSON.parse(JSON.stringify(scope.row))

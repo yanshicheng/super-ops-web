@@ -106,7 +106,6 @@ export default {
   methods: {
     getEditCardInfo() {
       masterApi.get(this.$route.query.pid).then(res => {
-        console.log(123, res)
         this.cardInfo = res.data
       })
     },

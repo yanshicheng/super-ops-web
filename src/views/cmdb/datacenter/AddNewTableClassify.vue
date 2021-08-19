@@ -93,7 +93,7 @@ export default {
     getTypeList() {
       masterApi.parent().then(res => {
         if (res.code === 0) {
-          this.typeList = res.data.results
+          this.typeList = res.data.result ? res.data.result : res.data
         } else {
           this.$message.error(res.message)
         }

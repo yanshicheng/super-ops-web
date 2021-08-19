@@ -17,21 +17,21 @@
             label-position="left"
           >
 
-            <el-form-item prop="username">
+            <el-form-item prop="username" >
               <span class="svg-container">
                 <svg-icon icon-class="username" />
               </span>
               <el-input
                 ref="username"
                 v-model="loginForm.username"
-                autocomplete="on"
                 name="username"
                 placeholder="username"
                 tabindex="1"
                 type="text"
+                autocomplete="off"
               />
             </el-form-item>
-            <el-form-item prop="password">
+            <el-form-item prop="password"   >
               <span class="svg-container">
                 <svg-icon icon-class="password" />
               </span>
@@ -40,7 +40,7 @@
                 :key="passwordType"
                 v-model="loginForm.password"
                 :type="passwordType"
-                autocomplete="on"
+                autocomplete="off"
                 name="password"
                 placeholder="Password"
                 tabindex="2"
@@ -103,8 +103,8 @@ export default {
   name: 'Login',
   data() {
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('密码长度不可小于六位'))
+      if ( !value) {
+        callback(new Error('密码不能为空'))
       } else {
         callback()
       }

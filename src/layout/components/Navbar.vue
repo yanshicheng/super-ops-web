@@ -25,19 +25,20 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="icos" class="user-avatar">
+          <img :src="superOps" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/users/personal-center">
-            <el-dropdown-item @click.native="user-info">个人中心</el-dropdown-item>
+          <a target="_blank" href="https://www.cnblogs.com/yanshicheng/">
+            <el-dropdown-item>Docs</el-dropdown-item>
+          </a>
+          <router-link to="/user/personal-center">
+            <el-dropdown-item>个人中心</el-dropdown-item>
           </router-link>
           <router-link to="/">
             <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://www.cnblogs.com/yanshicheng/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
+
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">注销登录</span>
           </el-dropdown-item>
@@ -51,6 +52,7 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import superOps from '@/assets/images/superops.png'
 // import ErrorLog from '@/components/ErrorLog'
 // import Screenfull from '@/components/Screenfull'
 // import SizeSelect from '@/components/SizeSelect'
@@ -67,7 +69,7 @@ export default {
   },
   data() {
     return {
-      icos: 'https://i.gtimg.cn/club/item/face/img/2/16022_100.gif'
+      superOps: superOps
     }
   },
   computed: {

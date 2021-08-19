@@ -43,10 +43,14 @@ export default {
   name: '',
   props: {
     editData: {
-      type: Object
+      type: Object,
+      default: function() {
+        return {}
+      }
     },
     pid: {
-      type: Number
+      type: Number,
+      default: null
     }
   },
   data() {

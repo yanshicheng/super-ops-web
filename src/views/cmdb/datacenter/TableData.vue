@@ -99,14 +99,18 @@ export default {
   name: '',
   props: {
     editData: {
-      type: Object
+      type: Object,
+      default: function() {
+        return {}
+      }
     },
     isEdit: {
       type: Boolean,
       default: true
     },
     pid: {
-      type: Number
+      type: Number,
+      default: null
     }
   },
   data() {

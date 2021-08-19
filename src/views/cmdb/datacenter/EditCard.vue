@@ -44,7 +44,8 @@ export default {
       default: false
     },
     pid: {
-      type: Number
+      type: Number,
+      default: null
     }
   },
   data() {

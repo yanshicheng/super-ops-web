@@ -59,7 +59,30 @@ export default {
   components: {
     RelationCenter
   },
-  props: ['isShow', 'fields', 'classify_id', 'rowData'],
+  // props: ['isShow', 'fields', 'classify_id', 'rowData'],
+  props: {
+    isShow: {
+      type: Boolean,
+      default: false
+    },
+    fields: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    classifyId: {
+      type: Number,
+      default: null
+    },
+    rowData: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
+
+  },
   data() {
     return {
       formData: [],
@@ -91,7 +114,7 @@ export default {
         obj[item.props] = item.value
       })
       const params = {
-        classify: this.classify_id,
+        classify: this.classifyId,
         data: obj
       }
       masterApi.update(this.rowData.id, params).then(res => {

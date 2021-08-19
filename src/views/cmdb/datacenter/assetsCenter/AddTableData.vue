@@ -49,7 +49,23 @@ import { CMDBAssets as masterApi } from '@/api/cmdb'
 
 export default {
   name: '',
-  props: ['isShow', 'fields', 'classify_id'],
+  // props: ['isShow', 'fields', 'classify_id'],
+  props: {
+    isShow: {
+      type: Boolean,
+      default: false
+    },
+    fields: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    },
+    classifyId: {
+      type: Number,
+      default: null
+    }
+  },
   data() {
     return {
       formData: []
@@ -79,7 +95,7 @@ export default {
         obj[item.props] = item.value
       })
       const params = {
-        classify: this.classify_id,
+        classify: this.classifyId,
 
         data: obj
       }

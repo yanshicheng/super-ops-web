@@ -76,10 +76,12 @@ export default {
   name: '',
   props: {
     editData: {
-      type: Array
+      type: Array,
+      default: () => []
     },
     pid: {
-      type: Number
+      type: Number,
+      default: null
     }
   },
   data() {
@@ -140,7 +142,7 @@ export default {
       }
       masterApi.list(params).then(res => {
         if (res.code === 0) {
-          this.innerTableData = res.data.result
+          this.innerTableData = res.data.result ? res.data.result : res.data
         } else {
           this.$message.error(res.message)
         }
