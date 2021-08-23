@@ -99,11 +99,15 @@
           </el-timeline-item>
         </el-timeline>
         <el-pagination
-          v-if="changeData.length"
+          v-show="pageQuerylist.total>0"
+          :current-page="pageQuerylist.page"
+          :page-size="pageQuerylist.limit"
+          :page-sizes="pageQuerylist.sizes"
+          :total="pageQuerylist.total"
           background
-          layout="prev, pager, next"
-          :total="total"
+          layout="total, sizes, prev, pager, next, jumper"
           @current-change="handleCurrentChange"
+          @size-change="handleSizeChange"
         />
       </div>
     </div>
@@ -123,6 +127,13 @@ export default {
       relationMeTableData: [],
       cardInfo: {},
       currentPage: 1,
+      pageQuerylist: {
+        page: 1,
+        size: 10,
+        total: 0,
+        sizes: [10, 20, 30, 40, 50],
+        search: ''
+      },
       changeData: []
     }
   },
@@ -149,6 +160,20 @@ export default {
         this.relationMeTableData = this.formatTableData(res.data.relevant)
       })
     },
+  handleSizeChange(val) {
+    this.pageQuerylist.size = val
+    this.pageQuerylist.page = 1
+    this.getChangeRecords()
+  },
+  handleCurrentChange(val) {
+    this.pageQuerylist.page = val
+    this.getChangeRecords()
+  },
+  searchFilter() {
+    this.pageQuerylist.page = 1
+    this.pageQuerylist.size = 10
+    this.getChangeRecords()
+  },
     formatBaiscInfo(tableObj) {
       const valueData = tableObj.data ? tableObj.data.data : {}
       const fields = tableObj ? tableObj.fields : {}
@@ -194,20 +219,17 @@ export default {
       })
       return allTableData
     },
-    handleCurrentChange(val) {
-      this.currentPage = val
-      this.getChangeRecords()
-    },
     getChangeRecords() {
       if (!this.$route.query.id) return false
       const params = {
         asset_id: this.$route.query.id,
-        page: this.currentPage
+        page: this.pageQuerylist.page,
+        size: this.pageQuerylist.size
       }
       CMDBRecord.list(params).then(res => {
         if (res.data && res.data.result && res.data.result.length) {
           this.changeData = res.data.result ? res.data.result : res.data
-          this.total = res.data.count
+          this.pageQuerylist.total = res.data.count
         }
       })
     },

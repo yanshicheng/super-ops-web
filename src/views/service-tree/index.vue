@@ -11,17 +11,14 @@
             <el-tab-pane name="2" label="节点权限">
               <AuthManage v-if="activeName=='2'" :nodes="currentNode" />
             </el-tab-pane>
-            <el-tab-pane name="3" label="资产中心">
-              <Homework v-if="activeName=='3'" :nodes="currentNode" />
+            <el-tab-pane name="3" label="节点大盘"><h1>待开发</h1></el-tab-pane>
+            <el-tab-pane name="4" label="资产中心">
+              <CMDBManage v-if="activeName=='4'" :nodes="currentNode" />
             </el-tab-pane>
-            <el-tab-pane name="4" label="作业平台">
-              <Homework v-if="activeName=='4'" :nodes="currentNode" />
+            <el-tab-pane name="5" label="作业平台">
+              <h1>待开发</h1>
             </el-tab-pane>
-            <el-tab-pane name="5" label="配置管理"><h1>待开发</h1></el-tab-pane>
-            <el-tab-pane name="6" label="发布系统"><h1>待开发</h1></el-tab-pane>
-            <el-tab-pane name="8" label="监控管理"><h1>待开发</h1></el-tab-pane>
-            <el-tab-pane name="9" label="流量调度"><h1>待开发</h1></el-tab-pane>
-            <el-tab-pane name="7" label="域名管理"><h1>待开发</h1></el-tab-pane>
+            <el-tab-pane name="6" label="监控配置"><h1>待开发</h1></el-tab-pane>
           </el-tabs>
         </div>
       </div>
@@ -33,7 +30,7 @@
 import NavTree from './components/NavTree.vue'
 import SectionDetail from './components/SectionDetail.vue'
 import AuthManage from './components/AuthManage.vue'
-import Homework from './components/Homework.vue'
+import CMDBManage from './components/cmdb/index.vue'
 import lockPic from '@/assets/images/lock.svg'
 
 export default {
@@ -42,7 +39,7 @@ export default {
     NavTree,
     SectionDetail,
     AuthManage,
-    Homework
+    CMDBManage
   },
   data() {
     return {
@@ -63,6 +60,7 @@ export default {
   },
   methods: {
     handleNodeClick(data) {
+      this.activeName = '1'
       this.currentNode = data
     },
     handleContextMenu(data) {

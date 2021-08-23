@@ -131,3 +131,99 @@ export const ServiceTreeTag = {
     })
   }
 }
+
+// 服务树相关接口
+const NodeClassify = 'v1/service-tree/node-link-classify'
+export const STNodeClassify = {
+  create(params) {
+    return request.post(`${NodeClassify}/`, params).then(response => {
+      return response
+    })
+  },
+  delete(id) {
+    return request.delete(`${NodeClassify}/${id}/`)
+  },
+  update(id, params) {
+    return request.put(`${NodeClassify}/${id}/`, params).then(response => {
+      return response
+    })
+  },
+  patch(id, params) {
+    return request.patch(`${NodeClassify}/${id}/`, params).then(response => {
+      return response
+    })
+  },
+  get(id) {
+    return request.get(`${NodeClassify}/${id}/`).then(response => {
+      return response
+    })
+  },
+  list(params) {
+    return request.get(`${NodeClassify}/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  detail(id, params) {
+    return request.get(`${NodeClassify}/${id}/server/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  getperm(id, params) {
+    return request.get(`${NodeClassify}/${id}/opera-permission-member/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  gettag(id, params) {
+    return request.get(`${NodeClassify}/${id}/tag/`, { params: params }).then(response => {
+      return response
+    })
+  }
+}
+
+// 服务树相关接口
+const NodeAsset = 'v1/service-tree/node-link-asset'
+export const STNodeAsset = {
+  create(params) {
+    return request.post(`${NodeAsset}/`, params).then(response => {
+      return response
+    })
+  },
+  delete(id) {
+    return request.delete(`${NodeAsset}/${id}/`)
+  },
+  update(id, params) {
+    return request.put(`${NodeAsset}/${id}/`, params).then(response => {
+      return response
+    })
+  },
+  patch(id, params) {
+    return request.patch(`${NodeAsset}/${id}/`, params).then(response => {
+      return response
+    })
+  },
+  get(id) {
+    return request.get(`${NodeAsset}/${id}/`).then(response => {
+      return response
+    })
+  },
+  list(params) {
+    return request.get(`${NodeAsset}/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  detail(id, params) {
+    return request.get(`${NodeAsset}/${id}/server/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  getperm(id, params) {
+    return request.get(`${NodeAsset}/${id}/opera-permission-member/`, { params: params }).then(response => {
+      return response
+    })
+  },
+  gettag(id, params) {
+    return request.get(`${NodeAsset}/${id}/tag/`, { params: params }).then(response => {
+      return response
+    })
+  }
+}

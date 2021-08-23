@@ -74,13 +74,7 @@ export default {
       forthIcon,
       fifthIcon,
       filterText: '',
-      dataList: [{
-        children: [{ id: 3, label: 'Python 实战', parent: 1, level: 2 }, { id: 4, label: 'Golang 企业级实战', parent: 1, level: 2 }],
-        id: 1,
-        label: '51Reboot',
-        level: 1,
-        parent: 0
-      }],
+      dataList: [],
       loading: false,
       isShow: false,
       editData: null,

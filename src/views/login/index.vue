@@ -17,7 +17,7 @@
             label-position="left"
           >
 
-            <el-form-item prop="username" >
+            <el-form-item prop="username">
               <span class="svg-container">
                 <svg-icon icon-class="username" />
               </span>
@@ -31,7 +31,7 @@
                 autocomplete="off"
               />
             </el-form-item>
-            <el-form-item prop="password"   >
+            <el-form-item prop="password">
               <span class="svg-container">
                 <svg-icon icon-class="password" />
               </span>
@@ -103,7 +103,7 @@ export default {
   name: 'Login',
   data() {
     const validatePassword = (rule, value, callback) => {
-      if ( !value) {
+      if (!value) {
         callback(new Error('密码不能为空'))
       } else {
         callback()

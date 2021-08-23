@@ -16,7 +16,7 @@
           <el-input v-model="formInline.search" placeholder="" @keyup.enter.native="searchData" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchData">查询</el-button>
+          <el-button type="primary" @click="searchFilter">查询</el-button>
         </el-form-item>
       </el-form>
       <el-button type="primary" size="small" plain @click="addNewData">新增</el-button>
@@ -46,10 +46,15 @@
           </el-table-column>
         </el-table>
         <el-pagination
+          v-show="pageQuerylist.total>0"
+          :current-page="pageQuerylist.page"
+          :page-size="pageQuerylist.limit"
+          :page-sizes="pageQuerylist.sizes"
+          :total="pageQuerylist.total"
           background
-          layout="prev, pager, next"
-          :total="total"
+          layout="total, sizes, prev, pager, next, jumper"
           @current-change="handleCurrentChange"
+          @size-change="handleSizeChange"
         />
       </template>
       <div v-else-if="noSelect" class="no-data">请选择主类型和子类型，来加载数据</div>
@@ -58,12 +63,12 @@
     <AddTableData
       :is-show.sync="showAddTableData"
       :fields="tableColumns"
-      :classify_id="formInline.classify_id"
+      :classifyId="formInline.classify_id"
     />
     <EditTableData
       :is-show.sync="showEditDia"
       :fields="tableColumns"
-      :classify_id="formInline.classify_id"
+      :classifyId="formInline.classify_id"
       :row-data="rowData"
     />
   </div>
@@ -97,13 +102,29 @@ export default {
       rowData: {},
       noSelect: true,
       total: 0,
-      currentPage: 1
+      currentPage: 1,
+      pageQuerylist: {
+        page: 1,
+        size: 10,
+        total: 0,
+        sizes: [10, 20, 30, 40, 50],
+        search: ''
+      }
     }
   },
   created() {
     this.getMainList()
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageQuerylist.size = val
+      this.pageQuerylist.page = 1
+      this.searchData()
+    },
+    handleCurrentChange(val) {
+      this.pageQuerylist.page = val
+      this.searchData()
+    },
     // 获取主列表
     getMainList() {
       CMDBClassify.parent().then(res => {
@@ -118,8 +139,9 @@ export default {
         this.secondList = res.data.result ? res.data.result : res.data
       })
     },
-    handleCurrentChange(val) {
-      this.currentPage = val
+    searchFilter() {
+      this.pageQuerylist.page = 1
+      this.pageQuerylist.size = 10
       this.searchData()
     },
     searchData() {
@@ -130,14 +152,15 @@ export default {
       const params = {
         classify_id: this.formInline.classify_id,
         search: this.formInline.search,
-        page: this.currentPage
+        page: this.pageQuerylist.page,
+        size: this.pageQuerylist.size
       }
       masterApi.list(params).then(res => {
         if (res.code === -1) {
           this.$message.error(res.message)
         } else {
           this.tableObj = res.data.result ? res.data.result : res.data
-          this.total = res.count
+          this.pageQuerylist.total = res.data.count
           this.formatTableData(this.tableObj)
         }
         this.noSelect = false
@@ -146,13 +169,20 @@ export default {
     // 获取table列表
     getTabeList(val) {
       if (!val) return false
-      const params = { classify_id: val }
+      this.pageQuerylist.page = 1
+      this.pageQuerylist.size = 10
+      this.pageQuerylist.total = 0
+      const params = { classify_id: val,
+        search: this.formInline.search,
+        page: 1,
+        size: 10
+      }
       masterApi.list(params).then(res => {
         if (res.code === -1) {
           this.$message.error(res.message)
         } else {
           this.tableObj = res.data.result ? res.data.result : res.data
-          this.total = res.count
+          this.pageQuerylist.total = res.data.count
           this.formatTableData(this.tableObj)
         }
         this.noSelect = false
@@ -203,6 +233,7 @@ export default {
         masterApi.delete(id).then(res => {
           if (res.code === 0) {
             this.$message.success('删除成功')
+            this.searchFilter()
             tableList.splice(index, 1)
           } else {
             this.$message.error(res.message)

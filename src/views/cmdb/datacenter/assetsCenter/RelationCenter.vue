@@ -45,7 +45,7 @@
     >
       <div style="margin-bottom:10px;">
         <el-input v-model="search" size="small" style="width: 180px;" @keyup.enter.native="searchData" />
-        <el-button plain type="primary" size="small" style="margin-left: 10px;" @click="searchData">查询</el-button>
+        <el-button plain type="primary" size="small" style="margin-left: 10px;" @click="searchFilter">查询</el-button>
       </div>
       <tempalte v-if="innerTableColumns.length">
         <el-table :data="innerTableData" border style="width: 100%">
@@ -68,9 +68,14 @@
           </el-table-column>
         </el-table>
         <el-pagination
+          v-show="pageQuerylist.total>0"
           background
-          layout="prev, pager, next"
-          :total="total"
+          :total="pageQuerylist.total"
+          :current-page="pageQuerylist.page"
+          :page-sizes="pageQuerylist.sizes"
+          :page-size="pageQuerylist.limit"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
       </tempalte>
@@ -88,7 +93,7 @@ export default {
   props: {
     parentAssetId: {
       type: Number,
-      default: null
+      default: 0
     }
   },
   data() {
@@ -101,16 +106,41 @@ export default {
       innerTableData: [],
       currentTableId: '',
       currentPage: 1,
-      total: 0
+      total: 0,
+      pageQuerylist: {
+        page: 1,
+        size: 10,
+        total: 0,
+        sizes: [10, 20, 30, 40, 50],
+        search_content: ''
+      },
     }
   },
   created() {
     this.fetchBDRelationList()
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageQuerylist.size = val
+      this.pageQuerylist.page = 1
+      this.searchData()
+    },
+    handleCurrentChange(val) {
+      this.pageQuerylist.page = val
+      this.searchData()
+    },
+    searchFilter() {
+      this.pageQuerylist.page = 1
+      this.pageQuerylist.size = 10
+      this.searchData()
+    },
     fetchBDRelationList() {
+      console.log(999999999)
+      console.log(this.parentAssetId)
       if (!this.parentAssetId) return false
       masterApi.get(this.parentAssetId).then(res => {
+        console.log(res)
+        console.log(999999999)
         if (res.code === 0) {
           this.tableData = this.formatTableList(res.data.children)
         } else {
@@ -171,28 +201,27 @@ export default {
       })
     },
     openRelationDia(tableId) {
+      this.pageQuerylist.page = 1
+      this.pageQuerylist.size = 10
       this.dialogVisible = true
       this.currentTableId = tableId
       this.currentPage = 1
-      this.searchData()
-    },
-    handleCurrentChange(val) {
-      this.currentPage = val
       this.searchData()
     },
     searchData() {
       const params = {
         classify_id: this.currentTableId,
         search: this.search,
-        page: this.currentPage,
+        page: this.pageQuerylist.page,
+        size: this.pageQuerylist.size,
         ban_bind: false
       }
       masterApi.list(params).then(res => {
         if (res.code === -1) {
           this.$message.error(res.message)
         } else {
-          this.formatInnerTableData(res.data)
-          this.total = res.count
+          this.formatInnerTableData(res.data.result)
+          this.pageQuerylist.total = res.data.count
         }
       })
     },

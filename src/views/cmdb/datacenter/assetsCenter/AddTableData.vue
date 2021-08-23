@@ -56,14 +56,14 @@ export default {
       default: false
     },
     fields: {
-      type: Object,
-      default: function() {
-        return {}
+      type: Array,
+      default: () => {
+        return []
       }
     },
     classifyId: {
       type: Number,
-      default: null
+      default: 0
     }
   },
   data() {
@@ -94,6 +94,7 @@ export default {
       this.formData.forEach(item => {
         obj[item.props] = item.value
       })
+      console.log(this.classifyId)
       const params = {
         classify: this.classifyId,
 

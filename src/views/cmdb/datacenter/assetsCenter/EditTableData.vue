@@ -40,7 +40,7 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="关联中心" name="relation">
-        <RelationCenter v-if="activeName==='relation'" :parent_asset_id="rowData.id" />
+        <RelationCenter v-if="activeName==='relation'" :parentAssetId="rowData.id" />
       </el-tab-pane>
     </el-tabs>
 
@@ -66,14 +66,14 @@ export default {
       default: false
     },
     fields: {
-      type: Object,
-      default: function() {
-        return {}
+      type: Array,
+      default: () => {
+        return []
       }
     },
     classifyId: {
       type: Number,
-      default: null
+      default: 0
     },
     rowData: {
       type: Object,
@@ -105,6 +105,8 @@ export default {
   },
   methods: {
     closeDia() {
+      console.log(this.rowData)
+      console.log(this.rowData)
       this.$emit('update:isShow', false)
       this.formData = []
     },
